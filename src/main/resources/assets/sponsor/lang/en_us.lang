@@ -1,0 +1,4 @@
+message.sponsor.welcome=%s, Welcome to %s!
+message.sponsor.showsponsors=Thanks to sponsors below!
+message.sponsor.fail=Fail to get sponsor list.
+message.sponsor.linktosponsor=Want to be added into the list? Go to %s to sponsor the author!

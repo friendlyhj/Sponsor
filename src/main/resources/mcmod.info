@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sponsor",
+  "name": "Sponsor",
+  "description": "A mod which can show sponsors when players add to the world.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["youyihj"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
