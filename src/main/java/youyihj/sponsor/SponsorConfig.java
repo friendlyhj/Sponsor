@@ -14,6 +14,7 @@ public class SponsorConfig {
 
     @Config.RequiresWorldRestart
     @Config.Comment("Length of sponsor list")
+    @Config.RangeInt(min = 1, max = 10)
     public static int sponsorListLength = 5;
 
     @Config.RequiresWorldRestart

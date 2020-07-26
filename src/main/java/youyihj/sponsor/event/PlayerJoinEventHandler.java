@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import youyihj.sponsor.Sponsor;
 import youyihj.sponsor.SponsorConfig;
 import youyihj.sponsor.Utils;
+import youyihj.sponsor.data.PlayerDataHandler;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +26,7 @@ public class PlayerJoinEventHandler {
         Entity entity = event.getEntity();
         if (entity instanceof EntityPlayer && !event.getWorld().isRemote) {
             EntityPlayer player = (EntityPlayer) entity;
+            if (PlayerDataHandler.get(player)) return;
             String modpackName = SponsorConfig.modpackName;
             if (modpackName != null && modpackName.length() > 0) {
                 Utils.sendMessage(player, I18n.format("message." + Sponsor.MODID + ".welcome", player.getName(), modpackName));
@@ -60,6 +62,7 @@ public class PlayerJoinEventHandler {
             if (link != null && link.length() > 0) {
                 Utils.sendMessage(player, I18n.format("message."+ Sponsor.MODID + ".linktosponsor", link));
             }
+            PlayerDataHandler.set(player, true);
         }
     }
 }
