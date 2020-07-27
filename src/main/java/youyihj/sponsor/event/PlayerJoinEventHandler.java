@@ -13,6 +13,7 @@ import youyihj.sponsor.Utils;
 import youyihj.sponsor.data.PlayerDataHandler;
 
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,11 @@ public class PlayerJoinEventHandler {
                 Utils.sendMessage(player, I18n.format("message." + Sponsor.MODID + ".showsponsors"));
                 try {
                     URL url = new URL(listURL);
-                    List<String> strings = IOUtils.readLines(url.openStream(), StandardCharsets.UTF_8);
+                    URLConnection conn = url.openConnection();
+                    conn.setConnectTimeout(10000);
+                    conn.setReadTimeout(10000);
+                    conn.setRequestProperty("User-Agent", Sponsor.MODID);
+                    List<String> strings = IOUtils.readLines(conn.getInputStream(), StandardCharsets.UTF_8);
                     ArrayList<Integer> hadGetIndex = new ArrayList<>();
                     if (strings.size() <= SponsorConfig.sponsorListLength) {
                         for (int i = 0; i < strings.size(); i++) {
