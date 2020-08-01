@@ -1,22 +1,47 @@
 package youyihj.sponsor;
 
-import net.minecraftforge.common.config.Config;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.common.config.Configuration;
 
-@Config(modid = Sponsor.MODID, name = Sponsor.NAME)
 public class SponsorConfig {
-    @Config.RequiresWorldRestart
-    @Config.Comment("The name of your modpack")
-    public static String modpackName = "example modpack";
+    private static Configuration config;
 
-    @Config.RequiresWorldRestart
-    @Config.Comment("URL of sponsor list")
-    public static String sponsorListURL = "https://example.com/SPONSOR.txt";
+    public static String modpackName;
+    public static String sponsorListURL;
+    public static int sponsorListLength;
+    public static String sponsorLink;
 
-    @Config.RequiresWorldRestart
-    @Config.Comment("Length of sponsor list")
-    public static int sponsorListLength = 5;
+    public SponsorConfig(FMLPreInitializationEvent event)
+    {
+        config = new Configuration(event.getSuggestedConfigurationFile());
 
-    @Config.RequiresWorldRestart
-    @Config.Comment("Link to sponsor")
-    public static String sponsorLink = "https://example.com/";
+        config.load();
+        load();
+    }
+
+    public static void load()
+    {
+        modpackName = config.get(Configuration.CATEGORY_GENERAL,
+                "modpackName",
+                "example modpack",
+                "The name of your modpack").getString();
+
+        sponsorListURL = config.get(Configuration.CATEGORY_GENERAL,
+                "sponsorListURL",
+                "https://example.com/SPONSOR.txt",
+                "URL of sponsor list").getString();
+
+        sponsorListLength = config.get(Configuration.CATEGORY_GENERAL,
+                "sponsorListLength",
+                5,
+                "Length of sponsor list").getInt();
+
+        sponsorLink = config.get(Configuration.CATEGORY_GENERAL,
+                "sponsorLink",
+                "https://example.com/",
+                "Link to sponsor").getString();
+
+        config.save();
+    }
+
 }
