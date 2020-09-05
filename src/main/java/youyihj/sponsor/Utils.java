@@ -28,7 +28,7 @@ public class Utils {
         return String.format("message.%s.%s", Sponsor.MODID, key);
     }
 
-    public static void showSponsorList(EntityPlayer player, World world, String urlString, int listLength, String link) {
+    public static void showSponsorList(EntityPlayer player, Random random, String urlString, int listLength, String link) {
         new Thread(() -> {
             try {
                 URL url = new URL(urlString);
@@ -43,7 +43,6 @@ public class Utils {
                         Utils.sendMessage(player, string);
                     }
                 } else {
-                    Random random = new Random(world.getWorldTime());
                     for (int i = 0; i < listLength; i++) {
                         int index = random.nextInt(strings.size());
                         while (hadGetIndex.contains(index)) {
