@@ -2,7 +2,8 @@ package youyihj.sponsor;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.*;
+import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.world.World;
 import org.apache.commons.io.IOUtils;
 
@@ -58,7 +59,13 @@ public class Utils {
             }
 
             if (link != null && link.length() > 0) {
-                Utils.sendMessage(player, I18n.format(getI18nKey("linktosponsor"), link));
+                ITextComponent linkToSponsorText = new TextComponentTranslation("message.sponsor.linktosponsor.0")
+                        .appendText(" ")
+                        .appendSibling(new TextComponentString(SponsorConfig.sponsorLink)
+                            .setStyle(new Style().setColor(TextFormatting.AQUA).setUnderlined(true).setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, SponsorConfig.sponsorLink))))
+                        .appendText(" ")
+                        .appendSibling(new TextComponentTranslation("message.sponsor.linktosponsor.1"));
+                player.sendStatusMessage(linkToSponsorText, false);
             }
         }).start();
     }
